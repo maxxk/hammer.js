@@ -180,6 +180,11 @@ function Hammer(element, options, undefined)
         if(isFunction(self["on"+ eventName])) {
             self["on"+ eventName].call(self, params);
         }
+        
+        var ev = document.createEvent('Event');
+        ev.initEvent(eventName, true, true, null);
+        ev.data = params;
+        params.originalEvent.target.dispatchEvent(ev);
     }
 
 
